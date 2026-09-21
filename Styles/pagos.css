@@ -1,0 +1,102 @@
+.pagos-header {
+    margin-bottom: 24px;
+}
+.pagos-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+.pagos-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+.pagos-highlight {
+    color: #f1c40f;
+}
+
+.pagos-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+.pagos-container h2 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+}
+
+.pagos-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.pagos-table th {
+    background: rgba(255,255,255,0.03);
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-color);
+}
+.pagos-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    vertical-align: middle;
+}
+.pagos-table tr:hover {
+    background: rgba(255,255,255,0.02);
+}
+
+.badge-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.badge-active {
+    background: rgba(46, 204, 113, 0.15);
+    color: #2ecc71;
+}
+.badge-inactive {
+    background: rgba(231, 76, 60, 0.15);
+    color: #e74c3c;
+}
+
+.btn-toggle {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: opacity 0.2s;
+}
+.btn-toggle:hover {
+    opacity: 0.8;
+}
+.btn-enable { background: #2ecc71; color: #fff; }
+.btn-disable { background: #e74c3c; color: #fff; }
+
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(241, 196, 15, 0.1);
+    color: #f1c40f;
+}

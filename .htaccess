@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Permitir acceso directo a carpetas de assets
+    RewriteRule ^Styles/(.*)$  Styles/$1  [L]
+    RewriteRule ^scripts/(.*)$ scripts/$1 [L]
+    RewriteRule ^img/(.*)$     img/$1     [L]
+    RewriteRule ^docs/(.*)$    docs/$1    [L]
+
+    # Redirigir todo lo demás a public/
+    RewriteRule ^$             public/    [L]
+    RewriteRule ^(?!public/)(.*)$ public/$1 [L]
+</IfModule>

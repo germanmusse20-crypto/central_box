@@ -201,6 +201,16 @@ function sidebarActive(string $controller, string $current): string {
                     <span class="sidebar-link-sub">Métodos y transacciones</span>
                 </span>
             </a>
+
+            <a href="<?= BASE_URL ?>/index.php?controller=proveedores&action=lista"
+               class="sidebar-link <?= sidebarActive('proveedores', $currentController) ?>">
+                <span class="sidebar-link-icon"><i data-lucide="truck"></i></span>
+                <span class="sidebar-link-text">
+                    <span class="sidebar-link-name">Proveedores</span>
+                    <span class="sidebar-link-sub">Gestión de proveedores</span>
+                </span>
+            </a>
+
         </div>
         <?php endif; ?>
 

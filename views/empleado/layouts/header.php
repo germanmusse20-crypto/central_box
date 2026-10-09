@@ -31,7 +31,8 @@ function empNavActive(string $action, string $current): string {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="<?= SCRIPTS_URL ?>/lucide.js"></script>
+
     <link rel="stylesheet" href="<?= STYLES_URL ?>/empleado.css">
     <?php if (!empty($extraCss) && is_array($extraCss)): ?>
         <?php foreach (array_filter($extraCss, fn($c) => $c !== 'empleado.css') as $css): ?>

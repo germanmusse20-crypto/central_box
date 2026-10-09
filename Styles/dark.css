@@ -1,0 +1,199 @@
+/* ============================================================
+   central_box — Tema Oscuro (dark.css)
+   Se activa añadiendo la clase "dark-mode" al elemento <html>
+   ============================================================ */
+
+html.dark-mode {
+
+    /* ── Fondos ────────────────────────────────────────────── */
+    --color-bg: #0d1a12;
+    /* fondo principal: verde muy oscuro */
+    --color-bg-secondary: #142019;
+    /* fondo secundario */
+    --color-bg-tertiary: #192a1f;
+    /* fondo terciario */
+
+    /* ── Superficies ───────────────────────────────────────── */
+    --color-surface: rgba(46, 204, 113, 0.08);
+    --color-surface-hover: rgba(46, 204, 113, 0.14);
+
+    /* ── Bordes ────────────────────────────────────────────── */
+    --color-border: rgba(46, 204, 113, 0.18);
+    --color-border-hover: rgba(46, 204, 113, 0.35);
+
+    /* ── Texto ─────────────────────────────────────────────── */
+    --color-text: #e8f5ec;
+    /* texto principal: blanco verdoso */
+    --color-text-secondary: #9ecfac;
+    /* texto secundario */
+    --color-text-muted: #5f8a6e;
+    /* texto atenuado */
+
+    /* ── Gradientes ────────────────────────────────────────── */
+    --gradient-bg: linear-gradient(135deg, #0d1a12 0%, #111e16 50%, #0d1a12 100%);
+    --gradient-card: linear-gradient(135deg, rgba(46, 204, 113, 0.07) 0%, rgba(39, 174, 96, 0.03) 100%);
+
+    /* ── Glassmorphism ─────────────────────────────────────── */
+    --glass-bg: rgba(13, 26, 18, 0.85);
+    --glass-border: rgba(46, 204, 113, 0.25);
+    --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.40);
+
+    /* ── Sombras (más opacas en modo oscuro) ───────────────── */
+    --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.30);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.40);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.50);
+}
+
+/* ============================================================
+   Componentes con color hardcodeado (no en variables)
+   ============================================================ */
+
+/* Body y fondo general */
+html.dark-mode body {
+    background: var(--gradient-bg);
+    color: var(--color-text);
+}
+
+/* Header */
+html.dark-mode .app-header {
+    background: rgba(13, 26, 18, 0.92);
+    border-bottom-color: var(--color-border);
+}
+
+/* Sidebar */
+html.dark-mode .sidebar {
+    background: #101d15;
+    border-right-color: var(--color-border);
+}
+
+/* Cards */
+html.dark-mode .card,
+html.dark-mode .stat-card,
+html.dark-mode .modal,
+html.dark-mode .toast {
+    background: #142019;
+    border-color: var(--color-border);
+}
+
+/* Tablas */
+html.dark-mode .table-container {
+    background: #142019;
+    border-color: var(--color-border);
+}
+
+html.dark-mode .table th {
+    background: rgba(46, 204, 113, 0.07);
+    color: var(--color-text-secondary);
+    border-bottom-color: var(--color-border);
+}
+
+html.dark-mode .table td {
+    border-bottom-color: var(--color-border);
+    color: var(--color-text);
+}
+
+html.dark-mode .table tbody tr:hover {
+    background: var(--color-surface);
+}
+
+/* Formularios */
+html.dark-mode .form-control {
+    background: #1a2b1f;
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+html.dark-mode .form-control:focus {
+    background: #1e3326;
+    border-color: var(--color-primary);
+}
+
+html.dark-mode select.form-control option {
+    background: #142019;
+    color: var(--color-text);
+}
+
+/* Alertas */
+html.dark-mode .alert-success {
+    background: rgba(46, 204, 113, 0.12);
+    border-color: rgba(46, 204, 113, 0.30);
+    color: #7ddc9f;
+}
+
+html.dark-mode .alert-error {
+    background: rgba(231, 76, 60, 0.12);
+    border-color: rgba(231, 76, 60, 0.30);
+    color: #f1948a;
+}
+
+html.dark-mode .alert-warning {
+    background: rgba(243, 156, 18, 0.12);
+    border-color: rgba(243, 156, 18, 0.30);
+    color: #f8c471;
+}
+
+html.dark-mode .alert-info {
+    background: rgba(52, 152, 219, 0.12);
+    border-color: rgba(52, 152, 219, 0.30);
+    color: #7fb3d3;
+}
+
+/* Botón secundario */
+html.dark-mode .btn-secondary {
+    background: rgba(46, 204, 113, 0.10);
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+html.dark-mode .btn-secondary:hover {
+    background: rgba(46, 204, 113, 0.18);
+}
+
+/* Botón ghost */
+html.dark-mode .btn-ghost {
+    color: var(--color-text-secondary);
+}
+
+html.dark-mode .btn-ghost:hover {
+    background: var(--color-surface-hover);
+    color: var(--color-text);
+}
+
+/* Mobile overlay */
+html.dark-mode .mobile-overlay {
+    background: rgba(0, 0, 0, 0.60);
+}
+
+/* Tabla de header / footer */
+html.dark-mode .table-header,
+html.dark-mode .table-footer {
+    background: rgba(46, 204, 113, 0.06);
+    border-color: var(--color-border);
+}
+
+/* Scrollbar en sidebar */
+html.dark-mode .sidebar-nav::-webkit-scrollbar-thumb {
+    background: rgba(46, 204, 113, 0.25);
+}
+
+/* Elemento de usuario en el header */
+html.dark-mode .header-user {
+    background: rgba(46, 204, 113, 0.08);
+    border-color: var(--color-border);
+}
+
+/* ============================================================
+   Transición suave al cambiar de tema
+   ============================================================ */
+html {
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+*,
+*::before,
+*::after {
+    transition-property: background-color, border-color, color;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+}

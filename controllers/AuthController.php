@@ -145,6 +145,27 @@ class AuthController
         $_SESSION['usuario_rol']    = $user['rol'];
         $_SESSION['usuario_avatar'] = $user['avatar'] ?? null;
 
+        // Fusionar carrito temporal (visitante) con el carrito del usuario recién logueado
+        if (!empty($_SESSION['carrito']) && $user['rol'] === 'cliente') {
+            require_once MODELS_PATH . '/Carrito.php';
+            $carritoTemporal = $_SESSION['carrito'];
+            // Limpiar la marca de usuario anterior para que init() cargue el carrito de BD
+            unset($_SESSION['carrito_usuario_id']);
+            $carritoModel = new Carrito();
+            foreach ($carritoTemporal as $item) {
+                $carritoModel->add(
+                    (int)$item['producto_id'],
+                    (int)$item['cantidad'],
+                    [
+                        'nombre' => $item['nombre'],
+                        'precio' => $item['precio'],
+                        'imagen' => $item['imagen'] ?? null,
+                        'stock'  => $item['stock'] ?? 0,
+                    ]
+                );
+            }
+        }
+
         setFlash('success', 'Bienvenido, ' . $user['nombre'] . '!');
         redirect('index.php?controller=dashboard&action=index');
     }

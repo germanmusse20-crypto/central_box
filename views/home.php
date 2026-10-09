@@ -76,7 +76,7 @@
                 <h1>Tu tienda virtual de <span class="highlight">confianza</span></h1>
                 <p>Encuentra bebidas, accesorios para dispositivos y artículos de papelería de la mejor calidad.</p>
                 <p>Compra fácil, rápido y seguro desde la comodidad de tu hogar.</p>
-                <a href="<?php echo BASE_URL; ?>/index.php?controller=productos" class="btn btn-hero" id="btn-comenzar">
+                <a href="<?php echo BASE_URL; ?>/index.php?controller=productos&action=index" class="btn btn-hero" id="btn-comenzar">
                     <i class="fas fa-shopping-cart"></i> Comenzar a Comprar
                 </a>
             </div>

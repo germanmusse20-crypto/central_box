@@ -25,7 +25,8 @@ if (str_starts_with($rawError, 'credenciales|')) {
     <title>Acceso Empleado — <?= APP_NAME ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="<?= SCRIPTS_URL ?>/lucide.js"></script>
+
     <link rel="stylesheet" href="<?= STYLES_URL ?>/empleado.css">
 </head>
 <body class="emp-body" style="background:linear-gradient(135deg,#fff 0%,#EEF2FF 60%,#D1FAE5 100%);">

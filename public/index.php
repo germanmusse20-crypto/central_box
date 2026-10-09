@@ -51,6 +51,7 @@ $controllers = [
     'reportes'   => 'ReportesController',
     'promociones'=> 'PromocionesController',
     'pagos'      => 'PagosController',
+    'proveedores' => 'ProveedorController',
 ];
 
 // Verificar que el controlador existe

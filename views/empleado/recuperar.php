@@ -16,7 +16,8 @@ $pasoLabels = ['1' => 'Solicitar', '2' => 'Verificar', '3' => 'Nueva clave'];
     <title>Recuperar contraseña — <?= APP_NAME ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="<?= SCRIPTS_URL ?>/lucide.js"></script>
+
     <link rel="stylesheet" href="<?= STYLES_URL ?>/empleado.css">
 </head>
 <body class="emp-body">

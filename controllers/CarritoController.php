@@ -36,8 +36,10 @@ class CarritoController
 
     public function agregar(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        // No se requiere login: visitantes pueden agregar al carrito temporal en sesión
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         $productoId = (int)($_GET['id'] ?? 0);
         $cantidad   = (int)($_GET['cantidad'] ?? 1);
@@ -57,6 +59,13 @@ class CarritoController
         ]);
 
         setFlash('success', '«' . $producto['nombre'] . '» agregado al carrito.');
+
+        // Si no hay sesión, redirigir al login para que pueda ver su carrito
+        if (!isLoggedIn()) {
+            redirect('index.php?controller=auth&action=login');
+            return;
+        }
+
         redirect('index.php?controller=carrito&action=index');
     }
 

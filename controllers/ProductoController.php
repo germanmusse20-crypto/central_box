@@ -16,6 +16,16 @@ class ProductoController
         $this->productoModel  = new Producto();
         $this->categoriaModel = new Categoria();
     }
+    public function index(): void
+    {
+        // Si es admin o vendedor, lo manda a la lista administrativa
+        if (isLoggedIn() && hasRole('admin', 'vendedor')) {
+            $this->lista();
+        } else {
+            // Si es cliente o visitante, lo manda al catálogo
+            $this->catalogo();
+        }
+    }
 
     public function lista(): void
     {

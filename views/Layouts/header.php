@@ -28,17 +28,26 @@ if ($user && $user['rol'] === 'admin') {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Lucide Icons (CDN) -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Lucide Icons (local) -->
+    <script src="<?= SCRIPTS_URL ?>/lucide.js"></script>
 
     <!-- Styles -->
     <link rel="stylesheet" href="<?= STYLES_URL ?>/main.css">
     <link rel="stylesheet" href="<?= STYLES_URL ?>/components.css">
+    <link rel="stylesheet" href="<?= STYLES_URL ?>/dark.css">
     <?php if (isset($extraCss)): ?>
         <?php foreach ((array)$extraCss as $css): ?>
             <link rel="stylesheet" href="<?= STYLES_URL ?>/<?= $css ?>">
         <?php endforeach; ?>
     <?php endif; ?>
+    <!-- Anti-flash: aplicar tema guardado antes del primer paint -->
+    <script>
+        (function() {
+            if (localStorage.getItem('cb_dark_mode') === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
 </head>
 <body>
 <div class="app-layout">
@@ -61,6 +70,11 @@ if ($user && $user['rol'] === 'admin') {
             </div>
 
             <div class="header-right">
+                <!-- Botón modo oscuro -->
+                <button id="darkModeToggle" class="btn btn-ghost btn-icon" title="Cambiar tema" aria-label="Activar modo oscuro">
+                    <i data-lucide="moon" id="darkModeIconMoon"></i>
+                    <i data-lucide="sun"  id="darkModeIconSun" style="display:none;"></i>
+                </button>
                 <?php if ($user && $user['rol'] === 'admin'): ?>
                     <div class="stock-notification" id="stockNotification">
                         <button type="button" class="btn btn-ghost btn-icon stock-notification-button"

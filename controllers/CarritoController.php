@@ -22,8 +22,9 @@ class CarritoController
 
     public function index(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         $pageTitle = 'Mi Carrito';
         $items     = $this->carritoModel->getItems();
@@ -71,8 +72,9 @@ class CarritoController
 
     public function actualizar(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             redirect('index.php?controller=carrito&action=index');
@@ -88,8 +90,9 @@ class CarritoController
 
     public function eliminar(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         $productoId = (int)($_GET['id'] ?? 0);
         $this->carritoModel->remove($productoId);
@@ -99,8 +102,9 @@ class CarritoController
 
     public function vaciar(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         $this->carritoModel->clear();
         redirect('index.php?controller=carrito&action=index');

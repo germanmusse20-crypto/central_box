@@ -132,8 +132,9 @@ class ClienteController
 
     public function carrito(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         $pageTitle    = 'Mi Carrito';
         $extraCss     = ['cliente.css'];
@@ -198,8 +199,9 @@ class ClienteController
 
     public function actualizarCarrito(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             redirect('index.php?controller=cliente&action=carrito');
@@ -229,8 +231,9 @@ class ClienteController
 
     public function eliminarCarrito(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         $productoId = (int)($_GET['id'] ?? 0);
         $this->carritoModel->remove($productoId);
@@ -242,8 +245,9 @@ class ClienteController
 
     public function vaciarCarrito(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         $this->carritoModel->clear();
         setFlash('info', 'Carrito vaciado correctamente.');

@@ -19,7 +19,7 @@
 <div class="pv-layout">
     <!-- Formulario -->
     <div class="pv-main">
-        <form action="<?= BASE_URL ?>/index.php?controller=carrito&action=confirmarPedido"
+        <form action="<?= BASE_URL ?>/index.php?controller=cliente&action=confirmarPedido"
               method="POST" id="checkoutForm">
             <?= csrfField() ?>
 
@@ -33,7 +33,7 @@
                     <label class="form-label">Direccion de envio *</label>
                     <input type="text" name="direccion_envio" class="form-control"
                            placeholder="Calle, numero, ciudad" required
-                           value="<?= e(getUser()['direccion'] ?? '') ?>">
+                           value="<?= e((getUser() ?? [])['direccion'] ?? '') ?>">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Notas adicionales</label>

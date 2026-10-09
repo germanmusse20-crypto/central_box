@@ -70,7 +70,7 @@
                         <?= formatPrice((float)$p['precio']) ?>
                     </span>
                     <?php if ($p['stock'] > 0): ?>
-                        <a href="<?= BASE_URL ?>/index.php?controller=carrito&action=agregar&id=<?= $p['id'] ?>"
+                        <a href="<?= BASE_URL ?>/index.php?controller=carrito&action=agregar&id=<?= $p['id'] ?>&_back=<?= urlencode('index.php?controller=productos&action=catalogo' . (!empty($_GET['categoria']) ? '&categoria=' . (int)$_GET['categoria'] : '') . (!empty($_GET['busqueda']) ? '&busqueda=' . urlencode($_GET['busqueda']) : '')) ?>"
                            class="btn btn-primary btn-sm">
                             <i data-lucide="shopping-cart"></i>
                         </a>

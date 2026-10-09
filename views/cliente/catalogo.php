@@ -101,7 +101,7 @@ $catalogUrl = BASE_URL . '/index.php?controller=cliente&action=catalogo';
                 <?php if ($agotado): ?>
                     <div style="padding:0 14px 14px;"><button class="cli-btn cli-btn-ghost cli-btn-block" type="button" disabled><i data-lucide="ban"></i> No disponible</button></div>
                 <?php else: ?>
-                    <div style="padding:0 14px 14px;"><a class="cli-btn cli-btn-primary cli-btn-block" href="<?= BASE_URL ?>/index.php?controller=cliente&action=agregarCarrito&id=<?= (int)$producto['id'] ?>"><i data-lucide="shopping-cart"></i> Agregar al carrito</a></div>
+                    <div style="padding:0 14px 14px;"><a class="cli-btn cli-btn-primary cli-btn-block" href="<?= BASE_URL ?>/index.php?controller=cliente&action=agregarCarrito&id=<?= (int)$producto['id'] ?>&_back=<?= urlencode('index.php?controller=cliente&action=catalogo' . ($busquedaAct || $categoriaAct ? '&busqueda=' . urlencode($busquedaAct) . '&categoria=' . $categoriaAct . '&page=' . $page : '')) ?>"><i data-lucide="shopping-cart"></i> Agregar al carrito</a></div>
                 <?php endif; ?>
             </article>
         <?php endforeach; ?>

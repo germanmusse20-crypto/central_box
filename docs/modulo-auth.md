@@ -59,10 +59,10 @@ Gestiona el **registro, login y recuperación de contraseña** para usuarios con
   $_SESSION['usuario_rol']    = $user['rol'];
   $_SESSION['usuario_avatar'] = $user['avatar'];
   ```
-- Redirige según rol:
+- **Fusión del carrito temporal:** si el usuario es `cliente` y había productos en `$_SESSION['carrito']` antes del login, los fusiona con el carrito guardado en BD. Si un producto se repite, suma las cantidades. Esto permite que un visitante que agrega productos antes de identificarse no los pierda al iniciar sesión.
+- **Redirección inteligente:** si antes del login se guardó `$_SESSION['redirect_after_login']` (por ejemplo, al intentar ir al checkout sin sesión), redirige a esa URL y la borra de la sesión. Si no hay URL guardada, redirige según rol:
   - `vendedor` → `empleado/dashboard`
-  - `admin` → `dashboard/index`
-  - `cliente` → `cliente/dashboard`
+  - `admin` / `cliente` → `dashboard/index`
 - Si falla: `setFlash('error', ...)` y vuelve al login.
 
 ---

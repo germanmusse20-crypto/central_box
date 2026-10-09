@@ -134,6 +134,18 @@ if ($user && $user['rol'] === 'admin') {
                             <span style="position:absolute;top:-2px;right:-2px;background:var(--color-danger);color:white;width:18px;height:18px;border-radius:50%;font-size:0.65rem;display:flex;align-items:center;justify-content:center;font-weight:700;"><?= $carritoCount ?></span>
                         <?php endif; ?>
                     </a>
+                <?php elseif (!$user): ?>
+                    <?php
+                    require_once MODELS_PATH . '/Carrito.php';
+                    $carritoModelVisitante = new Carrito();
+                    $carritoCountVisitante = $carritoModelVisitante->getCount();
+                    ?>
+                    <a href="<?= BASE_URL ?>/index.php?controller=carrito&action=index" class="btn btn-ghost btn-icon" title="Carrito" style="position:relative;">
+                        <i data-lucide="shopping-cart"></i>
+                        <?php if ($carritoCountVisitante > 0): ?>
+                            <span style="position:absolute;top:-2px;right:-2px;background:var(--color-danger);color:white;width:18px;height:18px;border-radius:50%;font-size:0.65rem;display:flex;align-items:center;justify-content:center;font-weight:700;"><?= $carritoCountVisitante ?></span>
+                        <?php endif; ?>
+                    </a>
                 <?php endif; ?>
 
                 <a href="<?= BASE_URL ?>/index.php?controller=usuarios&action=perfil" class="header-user" title="Mi Perfil">

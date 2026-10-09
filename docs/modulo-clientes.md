@@ -13,18 +13,20 @@ Portal completo para usuarios con rol `cliente`. Agrupa el catálogo, carrito, p
 
 ## Acceso por rol
 
-Todos los métodos del controlador requieren rol `cliente`, salvo `catalogo` y `producto` que son públicos.
-
-| Acción | cliente | admin/vendedor | visitante |
-|--------|---------|----------------|-----------|
+| Acción | cliente | admin/vendedor | visitante (sin sesión) |
+|--------|---------|----------------|------------------------|
 | `dashboard` | ✅ | ❌ | ❌ |
 | `catalogo` | ✅ | ✅ | ✅ |
 | `producto` | ✅ | ✅ | ✅ |
-| `carrito` y variantes | ✅ | ❌ | ❌ |
-| `checkout` / `confirmarPedido` | ✅ | ❌ | ❌ |
+| `carrito` y variantes de lectura/modificación | ✅ | ❌ | ✅ |
+| `agregarCarrito` | ✅ | ❌ | ✅ |
+| `actualizarCarrito` / `eliminarCarrito` / `vaciarCarrito` | ✅ | ❌ | ✅ |
+| `checkout` / `confirmarPedido` | ✅ | ❌ | ❌ → redirige al login |
 | `misOrders` / `detallePedido` | ✅ | ❌ | ❌ |
 | `promociones` | ✅ | ❌ | ❌ |
 | `puntosLealtad` | ✅ | ❌ | ❌ |
+
+Los métodos que permiten visitantes usan `if (isLoggedIn()) { requireRole('cliente'); }` en lugar de `requireLogin()`.
 
 ---
 
@@ -38,55 +40,67 @@ Todos los métodos del controlador requieren rol `cliente`, salvo `catalogo` y `
 ---
 
 ### `catalogo(): void`
+- Accesible sin sesión.
 - Filtros: `?categoria=ID`, `?busqueda=texto`, `?page=N`.
 - Paginación con `ITEMS_PER_PAGE`.
 - Carga categorías activas para el menú lateral.
 - Vista: `views/cliente/catalogo.php`
+- El botón "Agregar al carrito" en la vista incluye `&_back=URL` para que al agregar el usuario vuelva al catálogo (con los filtros activos conservados).
 
 ---
 
 ### `producto(): void`
 - **URL:** `?controller=cliente&action=producto&id=N`
+- Accesible sin sesión.
 - Muestra el detalle de un producto.
 - Redirige a `catalogo` si no existe.
 - Vista: `views/cliente/producto_detalle.php`
+- El formulario "Agregar al carrito" incluye un campo oculto `_back` con la URL del detalle, para que al agregar el usuario vuelva al mismo producto.
 
 ---
 
 ### `carrito(): void`
 - **URL:** `?controller=cliente&action=carrito`
-- Muestra el carrito actual con ítems y total.
+- Accesible sin sesión. Muestra el carrito temporal de `$_SESSION['carrito']`.
 - Vista: `views/cliente/carrito.php`
 
 ---
 
 ### `agregarCarrito(): void`
+- Accesible sin sesión.
 - Valida stock disponible.
 - Agrega el producto al carrito vía `Carrito::add()`.
-- Redirige a `carrito`.
+- Lee `$_REQUEST['_back']` y redirige ahí al terminar. Si no hay `_back`, redirige al catálogo.
+- El usuario **se queda en la misma página** de donde vino.
 
 ---
 
 ### `actualizarCarrito(): void` (POST)
+- Accesible sin sesión.
 - Actualiza cantidad de un ítem.
 - Llama a `Carrito::updateQuantity()`.
 
 ---
 
 ### `eliminarCarrito(): void`
+- Accesible sin sesión.
 - Elimina un producto del carrito.
 
 ---
 
 ### `vaciarCarrito(): void`
+- Accesible sin sesión.
 - Vacía completamente el carrito.
 
 ---
 
 ### `checkout(): void`
-- Verifica carrito no vacío.
-- Carga métodos de pago disponibles y activos.
-- Vista: `views/cliente/carrito.php` (sección checkout) o formulario dedicado.
+- **Requiere sesión.** Si el visitante intenta acceder:
+  1. Guarda `$_SESSION['redirect_after_login'] = 'index.php?controller=cliente&action=checkout'`.
+  2. Flash informativo: *"Tus productos están guardados"*.
+  3. Redirige al login.
+- Si ya está logueado, verifica carrito no vacío y carga métodos de pago.
+- Vista: `views/carrito/checkout.php`
 
 ---
 
@@ -129,10 +143,13 @@ Todos los métodos del controlador requieren rol `cliente`, salvo `catalogo` y `
 ---
 
 ### `confirmarPedido(): void` (POST)
-- Flujo idéntico al `CarritoController::confirmarPedido()`.
-- Valida CSRF, items, método de pago.
+- Requiere sesión y rol `cliente`.
+- Valida CSRF, items, método de pago y dirección de envío.
+- Lee el campo `direccion_envio` del POST (igual que la vista `checkout.php`).
+- Aplica descuento de lealtad (`$_SESSION['descuento_lealtad']`) y producto gratis (`$_SESSION['producto_gratis_lealtad']`) si están activos.
 - Llama a `Pedido::crear()`.
-- Vacía el carrito y redirige al detalle del pedido.
+- Vacía el carrito con `Carrito::clear()` y limpia las variables de lealtad de sesión.
+- Redirige a `misOrders`.
 
 ---
 
@@ -175,7 +192,9 @@ WHERE estado = 'activa'
 
 ## Diferencia con CarritoController
 
-`ClienteController` contiene sus **propias implementaciones** de carrito (`agregarCarrito`, `actualizarCarrito`, etc.) que son equivalentes a las de `CarritoController`. Ambos controladores coexisten; `ClienteController` es el portal unificado del cliente mientras que `CarritoController` expone las acciones del carrito como rutas independientes (`controller=carrito`).
+`ClienteController` contiene sus **propias implementaciones** de carrito (`agregarCarrito`, `actualizarCarrito`, etc.) que son las principales para el portal del cliente. `CarritoController` expone las mismas acciones como rutas independientes (`controller=carrito`) y las usa el catálogo compartido (`views/compartido/productos/`).
+
+La vista del checkout (`views/carrito/checkout.php`) es compartida por ambos controladores. El formulario POST apunta a `cliente&confirmarPedido` porque ese método tiene la lógica de descuento de lealtad y producto gratis.
 
 ---
 

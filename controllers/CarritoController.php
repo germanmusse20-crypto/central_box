@@ -61,7 +61,8 @@ class CarritoController
         ]);
 
         setFlash('success', '«' . $producto['nombre'] . '» agregado al carrito.');
-        redirect('index.php?controller=carrito&action=index');
+        $back = trim($_GET['_back'] ?? '');
+        redirect($back ?: 'index.php?controller=carrito&action=index');
     }
 
     public function actualizar(): void

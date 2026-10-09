@@ -100,8 +100,9 @@ class ClienteController
 
     public function producto(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         $id      = (int)($_GET['id'] ?? 0);
         $producto= $this->productoModel->findById($id);
@@ -190,11 +191,8 @@ class ClienteController
         ]);
 
         setFlash('success', '«' . $producto['nombre'] . '» agregado al carrito.');
-        if (!isLoggedIn()) {
-            redirect('index.php?controller=cliente&action=catalogo');
-            return;
-        }
-        redirect('index.php?controller=cliente&action=carrito');
+        $back = trim($_REQUEST['_back'] ?? '');
+        redirect($back ?: 'index.php?controller=cliente&action=catalogo');
     }
 
     public function actualizarCarrito(): void
@@ -284,7 +282,7 @@ class ClienteController
         $metodosPago = $this->getMetodosPagoDisponibles();
 
         require_once VIEWS_PATH . '/Layouts/header.php';
-        require_once VIEWS_PATH . '/cliente/checkout.php';
+        require_once VIEWS_PATH . '/carrito/checkout.php';
         require_once VIEWS_PATH . '/Layouts/footer.php';
     }
 
@@ -457,9 +455,9 @@ class ClienteController
             return;
         }
 
-        $metodoPago = trim($_POST['metodo_pago'] ?? '');
-        $direccion  = trim($_POST['direccion']   ?? '');
-        $notas      = trim($_POST['notas']       ?? '');
+        $metodoPago = trim($_POST['metodo_pago']    ?? '');
+        $direccion  = trim($_POST['direccion_envio'] ?? '');
+        $notas      = trim($_POST['notas']           ?? '');
 
         // UH-26 escenario 2: método inválido
         $metodosValidos = ['efectivo', 'tarjeta', 'transferencia'];

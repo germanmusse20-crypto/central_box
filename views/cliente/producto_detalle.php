@@ -69,6 +69,7 @@ $badgeText = $agotado ? 'Agotado' : ($stockBajo ? 'Stock bajo' : 'Disponible');
             <?php else: ?>
                 <form action="<?= BASE_URL ?>/index.php?controller=cliente&action=agregarCarrito" method="POST">
                     <input type="hidden" name="producto_id" value="<?= (int)$producto['id'] ?>">
+                    <input type="hidden" name="_back" value="index.php?controller=cliente&action=producto&id=<?= (int)$producto['id'] ?>">
                     
                     <div style="margin-bottom:16px;">
                         <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:8px; color:var(--cli-text-sec);">Cantidad</label>

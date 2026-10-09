@@ -26,9 +26,10 @@ class CarritoController
             requireRole('cliente');
         }
 
-        $pageTitle = 'Mi Carrito';
-        $items     = $this->carritoModel->getItems();
-        $total     = $this->carritoModel->getTotal();
+        $pageTitle    = 'Mi Carrito';
+        $items        = $this->carritoModel->getItems();
+        $total        = $this->carritoModel->getTotal();
+        $carritoModel = $this->carritoModel;
 
         require_once VIEWS_PATH . '/Layouts/header.php';
         require_once VIEWS_PATH . '/carrito/index.php';
@@ -60,13 +61,6 @@ class CarritoController
         ]);
 
         setFlash('success', '«' . $producto['nombre'] . '» agregado al carrito.');
-
-        // Si no hay sesión, redirigir al login para que pueda ver su carrito
-        if (!isLoggedIn()) {
-            redirect('index.php?controller=auth&action=login');
-            return;
-        }
-
         redirect('index.php?controller=carrito&action=index');
     }
 

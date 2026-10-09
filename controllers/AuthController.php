@@ -167,7 +167,9 @@ class AuthController
         }
 
         setFlash('success', 'Bienvenido, ' . $user['nombre'] . '!');
-        redirect('index.php?controller=dashboard&action=index');
+        $destino = $_SESSION['redirect_after_login'] ?? null;
+        unset($_SESSION['redirect_after_login']);
+        redirect($destino ?? 'index.php?controller=dashboard&action=index');
     }
 
     /**

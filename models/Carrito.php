@@ -28,7 +28,20 @@ class Carrito
             return;
         }
 
-        $_SESSION['carrito'] = $this->loadFromDatabase($usuarioId);
+        // Fusionar carrito temporal (visitante) con el carrito guardado en BD
+        $temporal = $_SESSION['carrito'];
+        $desdeBD  = $this->loadFromDatabase($usuarioId);
+
+        $fusionado = $desdeBD;
+        foreach ($temporal as $id => $item) {
+            if (isset($fusionado[$id])) {
+                $fusionado[$id]['cantidad'] += $item['cantidad'];
+            } else {
+                $fusionado[$id] = $item;
+            }
+        }
+
+        $_SESSION['carrito'] = $fusionado;
         $_SESSION['carrito_usuario_id'] = $usuarioId;
     }
 

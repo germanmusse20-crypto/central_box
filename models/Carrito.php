@@ -143,6 +143,7 @@ class Carrito
     {
         $this->init();
         $_SESSION['carrito'] = [];
+        unset($_SESSION['carrito_usuario_id']);
         $usuarioId = (int)($_SESSION['usuario_id'] ?? 0);
         if ($usuarioId > 0) {
             try {

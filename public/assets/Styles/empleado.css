@@ -8,10 +8,10 @@
     --emp-primary:        #10B981;
     --emp-primary-dark:   #059669;
     --emp-primary-light:  #D1FAE5;
-    --emp-accent:         #6366F1;
-    --emp-accent-light:   #EEF2FF;
-    --emp-gradient:       linear-gradient(135deg, #10B981 0%, #6366F1 100%);
-    --emp-gradient-soft:  linear-gradient(135deg, #D1FAE5 0%, #EEF2FF 100%);
+    --emp-accent:         #27ae60;
+    --emp-accent-light:   #d5f5e3;
+    --emp-gradient:       linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    --emp-gradient-soft:  linear-gradient(135deg, #d5f5e3 0%, #eafaf1 100%);
     --emp-bg:             #F9FAFB;
     --emp-bg-white:       #FFFFFF;
     --emp-text:           #111827;
@@ -31,7 +31,7 @@
 
 body.emp-body {
     font-family: var(--emp-font);
-    background: linear-gradient(160deg, #FFFFFF 0%, #EEF2FF 100%);
+    background: #f0fdf4;
     min-height: 100vh;
     color: var(--emp-text);
     -webkit-font-smoothing: antialiased;
@@ -1030,7 +1030,7 @@ body.emp-body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #FFFFFF 0%, #EEF2FF 60%, #D1FAE5 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #eafaf1 60%, #d5f5e3 100%);
     padding: 20px;
 }
 

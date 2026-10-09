@@ -32,7 +32,7 @@
         <div class="table-empty">
             <div class="table-empty-icon">🛒</div>
             <p>Tu carrito esta vacio.</p>
-            <a href="<?= BASE_URL ?>/index.php?controller=productos&action=catalogo"
+            <a href="<?= BASE_URL ?>/index.php?controller=cliente&action=catalogo"
                class="btn btn-primary btn-sm mt-md">
                 <i data-lucide="store"></i> Ver catalogo
             </a>

@@ -93,6 +93,3 @@
         </div>
     </div>
 </div>
-
-<script src="<?= SCRIPTS_URL ?>/main.js"></script>
-<script>lucide.createIcons();</script>

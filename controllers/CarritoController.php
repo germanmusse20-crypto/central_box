@@ -122,6 +122,7 @@ class CarritoController
         }
 
         $pageTitle = 'Finalizar compra';
+        $extraCss  = ['cliente.css'];
         $items     = $this->carritoModel->getItems();
         $total     = $this->carritoModel->getTotal();
 

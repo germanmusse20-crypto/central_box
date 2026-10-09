@@ -304,17 +304,17 @@ document.addEventListener("DOMContentLoaded", function() {
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { color: 'rgba(255, 255, 255, 0.6)', stepSize: 1 }
+                    grid: { color: 'rgba(0, 0, 0, 0.06)' },
+                    ticks: { color: '#555', stepSize: 1 }
                 },
                 x: {
                     grid: { display: false },
-                    ticks: { color: 'rgba(255, 255, 255, 0.8)' }
+                    ticks: { color: '#555' }
                 }
             },
             plugins: {
                 legend: {
-                    labels: { color: '#fff' }
+                    labels: { color: '#333' }
                 }
             }
         }

@@ -148,6 +148,7 @@ if ($user && $user['rol'] === 'admin') {
                     </a>
                 <?php endif; ?>
 
+                <?php if ($user): ?>
                 <a href="<?= BASE_URL ?>/index.php?controller=usuarios&action=perfil" class="header-user" title="Mi Perfil">
                     <div class="header-user-avatar">
                         <?= strtoupper(substr($user['nombre'] ?? 'U', 0, 1)) ?>
@@ -161,6 +162,11 @@ if ($user && $user['rol'] === 'admin') {
                 <a href="<?= BASE_URL ?>/index.php?controller=auth&action=logout" class="btn-logout-header" id="btnLogout" title="Cerrar Sesión">
                     <i data-lucide="log-out"></i>
                 </a>
+                <?php else: ?>
+                <a href="<?= BASE_URL ?>/index.php?controller=auth&action=login" class="btn-logout-header" title="Iniciar Sesión">
+                    <i data-lucide="log-in"></i>
+                </a>
+                <?php endif; ?>
             </div>
         </header>
 

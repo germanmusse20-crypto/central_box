@@ -833,9 +833,7 @@ section[id="categorias"] {
    ──────────────────────────────────────────────── */
 
 .banner-section {
-    background:
-        radial-gradient(ellipse 100% 200% at 85% 50%, rgba(99,102,241,.4) 0%, transparent 60%),
-        linear-gradient(135deg, #059669 0%, #10b981 40%, #6366f1 100%);
+    background: #2ecc71;
     color: var(--text-white);
     padding: 100px 24px;
     text-align: center;

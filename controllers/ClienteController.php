@@ -65,8 +65,9 @@ class ClienteController
 
     public function catalogo(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         $pageTitle = 'Catálogo';
         $extraCss  = ['cliente.css'];
@@ -147,14 +148,15 @@ class ClienteController
 
     public function agregarCarrito(): void
     {
-        requireLogin();
-        requireRole('cliente');
+        if (isLoggedIn()) {
+            requireRole('cliente');
+        }
 
         $productoId = (int)($_REQUEST['id'] ?? $_REQUEST['producto_id'] ?? 0);
         $cantidad   = max(1, (int)($_REQUEST['cantidad'] ?? 1));
         $producto   = $this->productoModel->findById($productoId);
 
-        // UH-22 escenario 5: no autenticado → ya se maneja por requireLogin
+        // UH-22 escenario 5: visitante puede agregar al carrito temporal en sesión
 
         // UH-22 escenario 2: sin stock
         if (!$producto || !$producto['activo']) {
@@ -187,6 +189,10 @@ class ClienteController
         ]);
 
         setFlash('success', '«' . $producto['nombre'] . '» agregado al carrito.');
+        if (!isLoggedIn()) {
+            redirect('index.php?controller=cliente&action=catalogo');
+            return;
+        }
         redirect('index.php?controller=cliente&action=carrito');
     }
 

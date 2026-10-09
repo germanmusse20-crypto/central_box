@@ -112,7 +112,12 @@ class CarritoController
 
     public function checkout(): void
     {
-        requireLogin();
+        if (!isLoggedIn()) {
+            $_SESSION['redirect_after_login'] = 'index.php?controller=carrito&action=checkout';
+            setFlash('info', 'Inicia sesión para finalizar tu compra. Tus productos están guardados.');
+            redirect('index.php?controller=auth&action=login');
+            return;
+        }
         requireRole('cliente');
 
         if ($this->carritoModel->isEmpty()) {
